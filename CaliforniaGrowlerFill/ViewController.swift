@@ -20,6 +20,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let brewery3 = Brewery(name: "Modern Times")
         let brewery4 = Brewery(name: "Council")
         breweries = [brewery1, brewery2, brewery3, brewery4]
+        
+        let manager = AFHTTPRequestOperationManager()
+        manager.GET(
+            "http://localhost:3000/api/breweries",
+            parameters: nil,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                println("JSON: " + responseObject.description)
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                println("Error: " + error.localizedDescription)
+            })
     }
 
     override func didReceiveMemoryWarning() {
