@@ -12,6 +12,8 @@
 		66B3B54D1973967900893A34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66B3B54B1973967900893A34 /* Main.storyboard */; };
 		66B3B54F1973967900893A34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66B3B54E1973967900893A34 /* Images.xcassets */; };
 		66B3B55B1973967900893A34 /* CaliforniaGrowlerFillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B3B55A1973967900893A34 /* CaliforniaGrowlerFillTests.swift */; };
+		66B3B56619739ECA00893A34 /* Brewery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B3B56519739ECA00893A34 /* Brewery.swift */; };
+		66B3B5691973A64600893A34 /* BreweryListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B3B5681973A64600893A34 /* BreweryListingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		66B3B5541973967900893A34 /* CaliforniaGrowlerFillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaliforniaGrowlerFillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B3B5591973967900893A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66B3B55A1973967900893A34 /* CaliforniaGrowlerFillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliforniaGrowlerFillTests.swift; sourceTree = "<group>"; };
+		66B3B56519739ECA00893A34 /* Brewery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brewery.swift; sourceTree = "<group>"; };
+		66B3B5681973A64600893A34 /* BreweryListingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreweryListingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 		66B3B5441973967900893A34 /* CaliforniaGrowlerFill */ = {
 			isa = PBXGroup;
 			children = (
+				66B3B56419739E8300893A34 /* Models */,
+				66B3B5671973A4A800893A34 /* Views */,
 				66B3B5471973967900893A34 /* AppDelegate.swift */,
 				66B3B5491973967900893A34 /* ViewController.swift */,
 				66B3B54B1973967900893A34 /* Main.storyboard */,
@@ -107,6 +113,22 @@
 				66B3B5591973967900893A34 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		66B3B56419739E8300893A34 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66B3B56519739ECA00893A34 /* Brewery.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		66B3B5671973A4A800893A34 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				66B3B5681973A64600893A34 /* BreweryListingCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +231,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				66B3B54A1973967900893A34 /* ViewController.swift in Sources */,
+				66B3B5691973A64600893A34 /* BreweryListingCell.swift in Sources */,
+				66B3B56619739ECA00893A34 /* Brewery.swift in Sources */,
 				66B3B5481973967900893A34 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
