@@ -13,6 +13,7 @@ class Brewery: NSObject {
     
     init(name: String) {
         self.name = name
+        super.init()
     }
     
     convenience init() {
