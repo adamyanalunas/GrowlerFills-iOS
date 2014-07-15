@@ -56,7 +56,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
             let response:NSArray = responseObject as NSArray
             for breweryInfo: AnyObject in response {
                 let name = breweryInfo["brewery"] as String
-                let newBrewery = Brewery(name: name)
+                let options = Brewery.fillOptionsToMask(breweryInfo as NSDictionary)
+                let newBrewery = Brewery(name: name, fills: options)
                 breweries += newBrewery
             }
             self.collectionView.reloadData()
