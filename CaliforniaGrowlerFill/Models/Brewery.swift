@@ -64,4 +64,8 @@ class Brewery: NSObject {
         
         return fills
     }
+    
+    class func fillTypeColor(fillType: FillTypeOptions) -> UIColor {
+        return UIColor(white: 210/255, alpha: 1)
+    }
 }

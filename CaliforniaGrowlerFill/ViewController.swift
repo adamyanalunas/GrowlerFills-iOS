@@ -29,7 +29,6 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
     // MARK: UICollectionViewDelegate methods
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
         var breweryCell: BreweryListingCell = collectionView.dequeueReusableCellWithReuseIdentifier("BreweryListingCell", forIndexPath: indexPath) as BreweryListingCell
-        breweryCell.backgroundColor = UIColor.grayColor()
         let brewery: Brewery = breweries[indexPath.item]
         
         self.configureCellForBrewery(breweryCell, brewery: brewery)
@@ -39,6 +38,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
     
     // MARK: Configuration
     func configureCellForBrewery(cell: BreweryListingCell, brewery: Brewery) {
+        cell.backgroundColor = Brewery.fillTypeColor(brewery.fillOptions)
         cell.breweryLabel.text = brewery.name
     }
     
