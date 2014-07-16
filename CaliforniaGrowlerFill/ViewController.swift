@@ -14,7 +14,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
                             
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getBreweries()
+        self.refreshList()
     }
 
     // MARK: UICollectionViewDataSource methods
@@ -42,8 +42,27 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
         cell.breweryLabel.text = brewery.name
     }
     
+    // MARK: Sorting
+    func sortedByFillability(list: [Brewery]) -> [Brewery] {
+        func fillability(b1: Brewery, b2: Brewery) -> Bool {
+            return (b1.fillability() > b2.fillability())
+        }
+        
+        return sorted(list, fillability)
+    }
+    
     // MARK: Network
-    func getBreweries() {
+    func refreshList() {
+        self.getBreweries { (list : [Brewery]) -> Void in
+            breweries = self.sortedByFillability(list)
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func getBreweries(successClosure: ([Brewery]) -> Void) {
+        var breweryList = [Brewery]()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
         let responseSerializer = AFJSONResponseSerializer()
         let requestSerializer = AFJSONRequestSerializer()
         
@@ -53,14 +72,18 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
         
         let requestSucess = {
             (operation :AFHTTPRequestOperation!, responseObject :AnyObject!) -> Void in
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            
             let response:NSArray = responseObject as NSArray
             for breweryInfo: AnyObject in response {
                 let name = breweryInfo["brewery"] as String
                 let options = Brewery.fillOptionsToMask(breweryInfo as NSDictionary)
                 let newBrewery = Brewery(name: name, fills: options)
-                breweries += newBrewery
+                breweryList += newBrewery
             }
-            self.collectionView.reloadData()
+            
+            successClosure(breweryList)
         }
         
         manager.GET(
@@ -69,6 +92,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
             success: requestSucess,
             failure: { (operation: AFHTTPRequestOperation!,
                 error: NSError!) in
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 println("Error: " + error.localizedDescription)
             })
     }

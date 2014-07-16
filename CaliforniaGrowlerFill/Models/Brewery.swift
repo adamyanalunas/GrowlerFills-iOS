@@ -54,6 +54,24 @@ class Brewery: NSObject {
     }
     
     // MARK: Helpers
+    func fillability() -> Int {
+        var max : Int = 0
+        
+        if self.fillOptions & FillTypeOptions.Blanks {
+            max++
+        }
+        
+        if self.fillOptions & FillTypeOptions.OtherLabels {
+            max++
+        }
+        
+        if self.fillOptions & FillTypeOptions.OneLiters {
+            max++
+        }
+        
+        return max
+    }
+    
     class func fillOptionsToMask(options: NSDictionary) -> FillTypeOptions {
         var fills = FillTypeOptions.None
         
