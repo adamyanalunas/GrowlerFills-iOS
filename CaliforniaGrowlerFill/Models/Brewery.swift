@@ -8,6 +8,13 @@
 
 import Foundation
 
+let optionColors : [UIColor] = [
+    UIColor(red: 227/255, green: 29/255,  blue: 18/255, alpha: 15/100),
+    UIColor(red: 232/255, green: 152/255, blue: 60/255, alpha: 15/100),
+    UIColor(red: 232/255, green: 212/255, blue: 60/255, alpha: 15/100),
+    UIColor(red: 96/255,  green: 230/255, blue: 28/255, alpha: 15/100)
+]
+
 struct FillTypeOptions : RawOptionSet {
     var value: UInt = 0
     init(_ value: UInt) { self.value = value }
@@ -35,7 +42,7 @@ class Brewery: NSObject {
     // MARK: LIfecycle
     init(name: String, fills: FillTypeOptions) {
         self.name = name
-        self.fillOptions = FillTypeOptions.None
+        self.fillOptions = fills
         self.comments = nil
         self.url = nil
         self.lastUpdated = nil
@@ -50,22 +57,36 @@ class Brewery: NSObject {
     class func fillOptionsToMask(options: NSDictionary) -> FillTypeOptions {
         var fills = FillTypeOptions.None
         
-        if (options["blanks"]) {
-            fills = (fills & FillTypeOptions.Blanks)
+        if (options["blanks"] as String == "Y") {
+            fills = (fills | FillTypeOptions.Blanks)
         }
         
-        if (options["otherbreweries"]) {
-            fills = (fills & FillTypeOptions.OtherLabels)
+        if (options["otherbreweries"] as String == "Y") {
+            fills = (fills | FillTypeOptions.OtherLabels)
         }
         
-        if (options["oneliters"]) {
-            fills = (fills & FillTypeOptions.OneLiters)
+        if (options["oneliters"] as String == "Y") {
+            fills = (fills | FillTypeOptions.OneLiters)
         }
         
         return fills
     }
     
     class func fillTypeColor(fillType: FillTypeOptions) -> UIColor {
-        return UIColor(white: 210/255, alpha: 1)
+        var colorLevel : Int = 0
+        
+        if fillType & FillTypeOptions.Blanks {
+            colorLevel++
+        }
+        
+        if (fillType & FillTypeOptions.OtherLabels) {
+            colorLevel++
+        }
+        
+        if (fillType & FillTypeOptions.OneLiters) {
+            colorLevel++
+        }
+        
+        return optionColors[colorLevel]
     }
 }

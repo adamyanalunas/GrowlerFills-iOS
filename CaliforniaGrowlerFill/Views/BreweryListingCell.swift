@@ -10,4 +10,5 @@ import UIKit
 
 class BreweryListingCell : UICollectionViewCell {
     @IBOutlet var breweryLabel : UILabel
+    @IBOutlet var fillabilityView : UIView
 }

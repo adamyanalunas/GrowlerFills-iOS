@@ -26,6 +26,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyJ-u0-2rg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Brewery Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXQ-WB-UIK">
                                             <rect key="frame" x="20" y="20" width="439" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -35,8 +39,15 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="JyJ-u0-2rg" firstAttribute="top" secondItem="sNq-Mu-mxo" secondAttribute="top" id="4TG-TO-iOT"/>
+                                    <constraint firstItem="JyJ-u0-2rg" firstAttribute="leading" secondItem="sNq-Mu-mxo" secondAttribute="leading" id="HVK-HR-PJJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="JyJ-u0-2rg" secondAttribute="bottom" id="hgk-UX-nDc"/>
+                                    <constraint firstAttribute="trailing" secondItem="JyJ-u0-2rg" secondAttribute="trailing" id="hvy-Ji-vlF"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="breweryLabel" destination="RXQ-WB-UIK" id="KHd-mV-sx7"/>
+                                    <outlet property="fillabilityView" destination="JyJ-u0-2rg" id="Sz0-Cr-zhQ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
