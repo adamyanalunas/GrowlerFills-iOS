@@ -90,21 +90,7 @@ class Brewery: NSObject {
         return fills
     }
     
-    class func fillTypeColor(fillType: FillTypeOptions) -> UIColor {
-        var colorLevel : Int = 0
-        
-        if fillType & FillTypeOptions.Blanks {
-            colorLevel++
-        }
-        
-        if (fillType & FillTypeOptions.OtherLabels) {
-            colorLevel++
-        }
-        
-        if (fillType & FillTypeOptions.OneLiters) {
-            colorLevel++
-        }
-        
-        return optionColors[colorLevel]
+    func fillTypeColor() -> UIColor {
+        return optionColors[self.fillability()]
     }
 }

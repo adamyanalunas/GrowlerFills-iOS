@@ -38,7 +38,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
     
     // MARK: Configuration
     func configureCellForBrewery(cell: BreweryListingCell, brewery: Brewery) {
-        cell.fillabilityView.backgroundColor = Brewery.fillTypeColor(brewery.fillOptions)
+        cell.fillabilityView.backgroundColor = brewery.fillTypeColor()
         cell.breweryLabel.text = brewery.name
     }
     
