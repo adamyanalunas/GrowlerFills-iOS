@@ -49,6 +49,24 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
         }
         
         return sorted(list, fillability)
+//        var fillSortWithNames = {
+//            (b1: Brewery, b2: Brewery) -> Int in
+//            var result : Int = 0
+//            
+//            if b1.fillability() > b2.fillability() {
+//                result = -1
+//            } else if b1.fillability() < b2.fillability() {
+//                result = 1
+//            }
+//            
+//            if result == 0 {
+//                result = b1.name.compare(b2.name)
+//            }
+//            
+//            return result
+//        }
+//        
+//        return list.sortedArrayUsingComparator(fillSortWithNames)
     }
     
     // MARK: Network
