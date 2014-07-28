@@ -9,6 +9,6 @@
 import UIKit
 
 class BreweryListingCell : UICollectionViewCell {
-    @IBOutlet var breweryLabel : UILabel
-    @IBOutlet var fillabilityView : UIView
+    @IBOutlet weak var breweryLabel: UILabel!
+    @IBOutlet weak var fillabilityView: UIView!
 }
