@@ -44,35 +44,47 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
     
     // MARK: Sorting
     func sortedByFillability(list: [Brewery]) -> [Brewery] {
-        func fillability(b1: Brewery, b2: Brewery) -> Bool {
-            return (b1.fillability() > b2.fillability())
-        }
-        
-        return sorted(list, fillability)
-//        var fillSortWithNames = {
-//            (b1: Brewery, b2: Brewery) -> Int in
-//            var result : Int = 0
-//            
-//            if b1.fillability() > b2.fillability() {
-//                result = -1
-//            } else if b1.fillability() < b2.fillability() {
-//                result = 1
-//            }
-//            
-//            if result == 0 {
-//                result = b1.name.compare(b2.name)
-//            }
-//            
-//            return result
+//        func fillability(b1: Brewery, b2: Brewery) -> Bool {
+//            return (b1.fillability() > b2.fillability())
 //        }
 //        
-//        return list.sortedArrayUsingComparator(fillSortWithNames)
+//        return sorted(list, fillability)
+        var fillSortWithNames = {
+            (b1: Brewery, b2: Brewery) -> Bool in
+//            var result = false
+            let fillability = b1.fillability() - b2.fillability()
+            var result = fillability > 0
+            
+            if fillability != 0 {
+                result = b1.name.compare(b2.name) == -1
+            }
+//            if b1.fillability() > b2.fillability() {
+//                result = true
+//            }
+            
+//            if result == false {
+//                result = b1.name.compare(b2.name) == -1
+//            }
+            
+            return result
+        }
+        
+        var mutableList = list
+        sort(&mutableList, fillSortWithNames)
+        return mutableList
+    }
+    
+    func sortedByName(list: [Brewery], ascending: Bool = false) -> [Brewery] {
+        return sorted(list, { (b1: Brewery, b2: Brewery) -> Bool in
+            return b1.name < b2.name
+            });
     }
     
     // MARK: Network
     func refreshList() {
         self.getBreweries { (list : [Brewery]) -> Void in
-            breweries = self.sortedByFillability(list)
+//            breweries = self.sortedByFillability(list)
+            breweries = self.sortedByName(list)
             self.collectionView.reloadData()
         }
     }
@@ -112,6 +124,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
                 error: NSError!) in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 println("Error: " + error.localizedDescription)
+                let alert = UIAlertView.init(title: "Error", message: "Server not available", delegate: nil, cancelButtonTitle: "Okay")
+                alert.show()
             })
     }
 }
