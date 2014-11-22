@@ -15,21 +15,28 @@ let optionColors : [UIColor] = [
     UIColor(red: 96/255,  green: 230/255, blue: 28/255, alpha: 15/100)
 ]
 
-struct FillTypeOptions : RawOptionSet {
-    var value: UInt = 0
+struct FillTypeOptions : RawOptionSetType, BooleanType {
+    typealias RawValue = UInt
+    private var value: UInt = 0
     init(_ value: UInt) { self.value = value }
-    func toRaw() -> UInt { return self.value }
-    func getLogicValue() -> Bool { return self.value != 0 }
-    static func fromRaw(raw: UInt) -> FillTypeOptions? { return self(raw) }
-    static func fromMask(raw: UInt) -> FillTypeOptions { return self(raw) }
-    static func convertFromNilLiteral() -> FillTypeOptions { return self(0) }
+    init(rawValue value: UInt) { self.value = value }
+    init(nilLiteral: ()) { self.value = 0 }
+    static var allZeros: FillTypeOptions { return self(0) }
     
-    static var None: FillTypeOptions          { return self(0) }
+    // MARK: RawOptionSetType
+    static func fromMask(raw: UInt) -> FillTypeOptions { return self(raw) }
+    var rawValue: UInt { return self.value }
+    
+    // MARK: BooleanType
+    var boolValue: Bool {
+        return value != 0
+    }
+    
+    static var None: FillTypeOptions { return self(0) }
     static var Blanks: FillTypeOptions   { return self(1 << 0) }
     static var OtherLabels: FillTypeOptions  { return self(1 << 1) }
     static var OneLiters: FillTypeOptions   { return self(1 << 2) }
 }
-func == (lhs: FillTypeOptions, rhs: FillTypeOptions) -> Bool     { return lhs.value == rhs.value }
 
 
 class Brewery: NSObject {
@@ -49,7 +56,7 @@ class Brewery: NSObject {
         super.init()
     }
     
-    convenience init() {
+    convenience override init() {
         self.init(name: "", fills: FillTypeOptions.None)
     }
     

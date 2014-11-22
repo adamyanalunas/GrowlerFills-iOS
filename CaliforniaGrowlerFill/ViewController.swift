@@ -18,16 +18,16 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
     }
 
     // MARK: UICollectionViewDataSource methods
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView!) -> Int {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return breweries.count
     }
     
     // MARK: UICollectionViewDelegate methods
-    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var breweryCell: BreweryListingCell = collectionView.dequeueReusableCellWithReuseIdentifier("BreweryListingCell", forIndexPath: indexPath) as BreweryListingCell
         let brewery: Brewery = breweries[indexPath.item]
         
@@ -56,7 +56,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
             var result = fillability > 0
             
             if fillability != 0 {
-                result = b1.name.compare(b2.name) == -1
+                result = b1.name.compare(b2.name) == NSComparisonResult.OrderedAscending
             }
 //            if b1.fillability() > b2.fillability() {
 //                result = true
@@ -110,7 +110,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
                 let name = breweryInfo["brewery"] as String
                 let options = Brewery.fillOptionsToMask(breweryInfo as NSDictionary)
                 let newBrewery = Brewery(name: name, fills: options)
-                breweryList += newBrewery
+                breweryList.append(newBrewery)
             }
             
             successClosure(breweryList)
