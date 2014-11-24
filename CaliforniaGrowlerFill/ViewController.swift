@@ -11,10 +11,12 @@ import UIKit
 var breweries = [Brewery]()
 
 class ViewController: UICollectionViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-                            
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshList()
+        
+        self.title = "CaliforniaGrowlerFills"
     }
 
     // MARK: UICollectionViewDataSource methods
@@ -81,7 +83,12 @@ class ViewController: UICollectionViewController, UICollectionViewDelegate, UICo
     }
     
     // MARK: Network
-    func refreshList() {
+    @IBAction func addBrewery() {
+        let url = NSURL(string: "http://tinyurl.com/cagrowlers&usd=2&usg=ALhdy29dueT9Ngr23GC-YHd_te_FzaBw6Q")
+        UIApplication.sharedApplication().openURL(url!)
+    }
+    
+    @IBAction func refreshList() {
         self.getBreweries { (list : [Brewery]) -> Void in
 //            breweries = self.sortedByFillability(list)
             breweries = self.sortedByName(list)
