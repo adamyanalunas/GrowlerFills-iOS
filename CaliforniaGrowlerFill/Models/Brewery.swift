@@ -64,15 +64,15 @@ class Brewery: NSObject {
     func fillability() -> Int {
         var max : Int = 0
         
-        if self.fillOptions & FillTypeOptions.Blanks {
+        if self.fillOptions & .Blanks {
             max++
         }
         
-        if self.fillOptions & FillTypeOptions.OtherLabels {
+        if self.fillOptions & .OtherLabels {
             max++
         }
         
-        if self.fillOptions & FillTypeOptions.OneLiters {
+        if self.fillOptions & .OneLiters {
             max++
         }
         
@@ -83,15 +83,15 @@ class Brewery: NSObject {
         var fills = FillTypeOptions.None
         
         if (options["blanks"] as String == "Y") {
-            fills = (fills | FillTypeOptions.Blanks)
+            fills = (fills | .Blanks)
         }
         
         if (options["otherbreweries"] as String == "Y") {
-            fills = (fills | FillTypeOptions.OtherLabels)
+            fills = (fills | .OtherLabels)
         }
         
         if (options["oneliters"] as String == "Y") {
-            fills = (fills | FillTypeOptions.OneLiters)
+            fills = (fills | .OneLiters)
         }
         
         return fills
